@@ -6,7 +6,7 @@
 set backup
 
 " tell vim where to put its backup files
-set backupdir=$HOME/temp
+set backup=$HOME/temp
 
 " tell vim where to put its swap files
 set dir=$HOME/temp
@@ -80,11 +80,11 @@ syntax on
 "set leader key to space 
 let mapleader = " "
 
-"moves lines down
-nnoremap <leader>j ddp
-
 "moves lines up
-nnoremap <leader>k ddP
+nnoremap <leader>k ddp
+
+"moves lines down
+nnoremap <leader>j ddkP
 
 "insert a blank line and return to normal
 nnoremap <leader>O O<esc>
@@ -102,9 +102,5 @@ nnoremap <c-u> <esc>veU <esc>
 "open vimrc in a split file for quick editing
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>  
 
-"source myvimrc (this is a little obsolete considering we already autoload the
-"vimrc on change, but fuck it?)
+"source myvimrc
 nnoremap <leader>sv :so $MYVIMRC<cr>  
-
-"creates HTML tags from word object at the beggining and end of a line
-nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0 
