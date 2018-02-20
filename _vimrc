@@ -23,6 +23,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" vim.surround
+Plugin 'tpope/vim-surround'
+
 "Dante Colorscheme
 Plugin 'vim-scripts/dante.vim'
 
@@ -34,6 +37,8 @@ Plugin 'tonsky/FiraCode'
 
 " office theme
 Plugin 'nightsense/office'
+
+
 
 
 " All of your Plugins must be added before the following line
@@ -84,11 +89,20 @@ let mapleader = " "
 nnoremap <leader>j ddp
 
 "moves lines up
-nnoremap <leader>k ddP
+nnoremap <leader>k ddkP
 
 "insert a blank line and return to normal
 nnoremap <leader>O O<esc>
 nnoremap <leader>o o<esc>
+
+"copies to clipboard register from visual
+vnoremap <leader>y "*y
+
+"adds a ',' to the end of the word object
+nnoremap <leader>, Ea, <esc>0
+
+"adds quotes to the surrounding word object
+nnoremap <leader>b ysiw
 
 "allows delete from insert
 inoremap <c-d> <esc>ddi
