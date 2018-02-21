@@ -38,9 +38,6 @@ Plugin 'tonsky/FiraCode'
 " office theme
 Plugin 'nightsense/office'
 
-
-
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -95,6 +92,10 @@ nnoremap <leader>k ddkP
 nnoremap <leader>O O<esc>
 nnoremap <leader>o o<esc>
 
+"insert a black space to the left or right of the cursor
+nnoremap <leader>h i<space><esc>
+nnoremap <leader>l a<space><esc>
+
 "copies to clipboard register from visual
 vnoremap <leader>y "*y
 
@@ -102,7 +103,7 @@ vnoremap <leader>y "*y
 nnoremap <leader>, Ea, <esc>0
 
 "adds quotes to the surrounding word object
-nnoremap <leader>b ysiw
+nnoremap <leader>b ys
 
 "allows delete from insert
 inoremap <c-d> <esc>ddi
