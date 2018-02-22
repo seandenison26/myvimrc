@@ -50,14 +50,14 @@ filetype plugin indent on    " required
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
-"opens NERDTree on startup 
+"opens NERDTree on startup
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 
 "auto loads the VIMRC any time a change is made to it
 augroup myvimrc
     au!
-    au BufWritePost _vimrc so $MYVIMRC 
+    au BufWritePost _vimrc so $MYVIMRC
 augroup END
 
 """"""""""""""""""""""""""""""
@@ -69,17 +69,17 @@ set renderoptions=type:directx
 set encoding=utf-8
 set guifont=Fira_Code
 
-set number 
+set number
 
 colorscheme office-dark
 
 syntax on
 
 """"""""""""""""""""""""""""""
-"KEY MAPPINGS 
+"KEY MAPPINGS
 """"""""""""""""""""""""""""""
 
-"set leader key to space 
+"set leader key to space
 let mapleader = " "
 
 "moves lines down
@@ -114,12 +114,15 @@ inoremap <c-u> <esc>veU <esc>i
 "uppercases word from normal
 nnoremap <c-u> <esc>veU <esc>
 
+"removes all trailing white space
+nnoremap <leader>c :%s/\s\+$//e <cr>
+
 "open vimrc in a split file for quick editing
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>  
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 "source myvimrc (this is a little obsolete considering we already autoload the
 "vimrc on change, but fuck it?)
-nnoremap <leader>sv :so $MYVIMRC<cr>  
+nnoremap <leader>sv :so $MYVIMRC<cr>
 
 "creates HTML tags from word object at the beggining and end of a line
-nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0 
+nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
