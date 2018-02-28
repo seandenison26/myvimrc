@@ -60,6 +60,9 @@ augroup myvimrc
     au BufWritePost _vimrc so $MYVIMRC
 augroup END
 
+
+"sets path to utilize fuzzy file finder
+set path=$PWD/**
 """"""""""""""""""""""""""""""
 "GUI CHANGES
 """"""""""""""""""""""""""""""
@@ -113,6 +116,9 @@ inoremap <c-u> <esc>veU <esc>i
 
 "uppercases word from normal
 nnoremap <c-u> <esc>veU <esc>
+
+"inserts work email
+nnoremap <leader>@ isean.denison@csireg.com <esc>
 
 "removes all trailing white space
 nnoremap <leader>c :%s/\s\+$//e <cr>
