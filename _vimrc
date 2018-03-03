@@ -76,7 +76,7 @@ colorscheme office-dark
 syntax on
 
 """"""""""""""""""""""""""""""
-"KEY MAPPINGS
+"GENERAL KEY MAPPINGS
 """"""""""""""""""""""""""""""
 
 "set leader key to space
@@ -126,3 +126,11 @@ nnoremap <leader>sv :so $MYVIMRC<cr>
 
 "creates HTML tags from word object at the beggining and end of a line
 nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
+
+""""""""""""""""""""""""""""""
+"REACT - REDUX KEY MAPPINGS
+""""""""""""""""""""""""""""""
+
+"Creates a react component from start of a word on a line
+nnoremap <leader>rc iconst <esc>EA = ({}) => {<cr><cr>}
+
