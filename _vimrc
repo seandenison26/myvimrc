@@ -60,9 +60,9 @@ augroup myvimrc
     au BufWritePost _vimrc so $MYVIMRC
 augroup END
 
-
 "sets path to utilize fuzzy file finder
 set path=$PWD/**
+
 """"""""""""""""""""""""""""""
 "GUI CHANGES
 """"""""""""""""""""""""""""""
@@ -85,6 +85,10 @@ syntax on
 "set leader key to space
 let mapleader = " "
 
+"allows esapce from insert
+"inoremap <esc> <nop> would turn this off
+inoremap  jk <esc>
+
 "moves lines down
 nnoremap <leader>j ddp
 
@@ -95,10 +99,14 @@ nnoremap <leader>k ddkP
 nnoremap <leader>O O<esc>
 nnoremap <leader>o o<esc>
 
-"insert a black space to the left or right of the cursor
-nnoremap <leader>h i<space><esc>
-nnoremap <leader>l a<space><esc>
+"insert a black space to the left or right of the cursor 
+nnoremap <leader>H i<space><esc>
+nnoremap <leader>L a<space><esc>
 
+"easier mappings for beggining and ending of line
+nnoremap <leader>h 0
+nnoremap <leader>l $
+ 
 "copies to clipboard register from visual
 vnoremap <leader>y "*y
 
@@ -117,6 +125,9 @@ inoremap <c-u> <esc>veU <esc>i
 "uppercases word from normal
 nnoremap <c-u> <esc>veU <esc>
 
+"changes word upto _
+nnoremap <leader>- ct_
+
 "inserts work email
 nnoremap <leader>@ isean.denison@csireg.com <esc>
 
@@ -132,3 +143,9 @@ nnoremap <leader>sv :so $MYVIMRC<cr>
 
 "creates HTML tags from word object at the beggining and end of a line
 nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
+
+""""""""""""""""""""""""""""""
+"ABBREVIATIONS
+""""""""""""""""""""""""""""""
+iabbrev adn and
+iabbrev waht what
