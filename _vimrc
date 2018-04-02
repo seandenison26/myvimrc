@@ -79,7 +79,7 @@ colorscheme office-dark
 syntax on
 
 """"""""""""""""""""""""""""""
-"KEY MAPPINGS
+"GENERAL KEY MAPPINGS
 """"""""""""""""""""""""""""""
 
 "set leader key to space
@@ -149,3 +149,9 @@ nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
 """"""""""""""""""""""""""""""
 iabbrev adn and
 iabbrev waht what
+
+"REACT - REDUX KEY MAPPINGS
+""""""""""""""""""""""""""""""
+
+"Creates a react component from start of a word on a line
+nnoremap <leader>rc iconst <esc>EA = ({}) => {<cr><cr>} 
