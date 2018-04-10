@@ -1,23 +1,24 @@
 """"""""""""""""""""""""""""""
 "VUNDLE PLUGINS AND SETUP
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""" 
 
-" set back up for vim
-set backup
+"set back up for vim 
+set backup 
 
-" tell vim where to put its backup files
-set backupdir=$HOME/temp
+" tell vim where to put its backup files 
+set backupdir=$HOME/temp 
 
-" tell vim where to put its swap files
-set dir=$HOME/temp
+" tell vim where to put its swap files 
+set dir=$HOME/temp 
+ 
+set nocompatible           " be iMproved, required
+filetype off               " required 
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" set the runtime path to include Vundle and initialize 
+set rtp+=~/.vim/bundle/Vundle.vim 
+call vundle#begin() 
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
+"alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
@@ -50,9 +51,24 @@ filetype plugin indent on    " required
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
+""""""""""""""""""""""""""""""
+"AUTO COMMANDS
+""""""""""""""""""""""""""""""
+
 "opens NERDTree on startup
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+augroup auto_tree
+	autocmd VimEnter * NERDTree
+	autocmd VimEnter * wincmd p
+augroup END
+
+"automatically format csv files
+augroup csv_tsv
+	autocmd BufNewFile,BufRead *.csv *.tsv setlocal noexpandtab
+	autocmd BufNewFile,BufRead *.csv *.tsv setlocal shiftwidth=20
+	autocmd BufNewFile,BufRead *.csv *.tsv setlocal softtabstop=20
+	autocmd BufNewFile,BufRead *.csv *.tsv setlocal tabstop=50
+	autocmd BufNewFile,BufRead *.csv *.tsv setlocal nowrap
+augroup END
 
 "auto loads the VIMRC any time a change is made to it
 augroup myvimrc
@@ -84,6 +100,7 @@ syntax on
 
 "set leader key to space
 let mapleader = " "
+let maplocalleader = " "
 
 "allows esapce from insert
 "inoremap <esc> <nop> would turn this off
@@ -150,6 +167,7 @@ nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
 iabbrev adn and
 iabbrev waht what
 
+""""""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
 """"""""""""""""""""""""""""""
 
