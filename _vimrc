@@ -140,7 +140,7 @@ inoremap <c-d> <esc>ddi
 inoremap <c-u> <esc>veU <esc>i
 
 "uppercases word from normal
-nnoremap <c-u> <esc>veU <esc>
+nnoremap <leader>u <esc>veU <esc>
 
 "changes word upto _
 nnoremap <leader>- ct_
