@@ -1,22 +1,22 @@
 """"""""""""""""""""""""""""""
 "VUNDLE PLUGINS AND SETUP
-"""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""" 
 
-"set back up for vim
-set backup
+"set back up for vim 
+set backup 
 
-" tell vim where to put its backup files
-set backupdir=$HOME/temp
+" tell vim where to put its backup files 
+set backupdir=$HOME/temp 
 
-" tell vim where to put its swap files
-set dir=$HOME/temp
-
+" tell vim where to put its swap files 
+set dir=$HOME/temp 
+ 
 set nocompatible           " be iMproved, required
-filetype off               " required
+filetype off               " required 
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" set the runtime path to include Vundle and initialize 
+set rtp+=~/.vim/bundle/Vundle.vim 
+call vundle#begin() 
 
 "alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -116,14 +116,14 @@ nnoremap <leader>k ddkP
 nnoremap <leader>O O<esc>
 nnoremap <leader>o o<esc>
 
-"insert a black space to the left or right of the cursor
+"insert a black space to the left or right of the cursor 
 nnoremap <leader>H i<space><esc>
 nnoremap <leader>L a<space><esc>
 
 "easier mappings for beggining and ending of line
 nnoremap <leader>h 0
 nnoremap <leader>l $
-
+ 
 "copies to clipboard register from visual
 vnoremap <leader>y "*y
 
@@ -164,15 +164,6 @@ nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
 """"""""""""""""""""""""""""""
 "ABBREVIATIONS
 """"""""""""""""""""""""""""""
-augroup sql_keywords
-	:autocmd FileType sql :iabbrev <buffer> select SELECT
-	:autocmd FileType sql :iabbrev <buffer> from FROM
-	:autocmd FileType sql :iabbrev <buffer> where WHERE
-	:autocmd FileType sql :iabbrev <buffer> and AND
-	:autocmd FileType sql :iabbrev <buffer> in IN
-	:autocmd FileType sql :iabbrev <buffer> not NOT
-augroup END
-
 iabbrev adn and
 iabbrev waht what
 
@@ -181,4 +172,4 @@ iabbrev waht what
 """"""""""""""""""""""""""""""
 
 "Creates a react component from start of a word on a line
-nnoremap <leader>rc iconst <esc>EA = ({}) => {<cr><cr>}
+nnoremap <leader>rc iconst <esc>EA = ({}) => {<cr><cr>} 
