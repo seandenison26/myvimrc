@@ -63,11 +63,18 @@ augroup END
 
 "automatically format csv files
 augroup csv_tsv
-	autocmd BufNewFile,BufRead *.csv *.tsv setlocal noexpandtab
-	autocmd BufNewFile,BufRead *.csv *.tsv setlocal shiftwidth=20
-	autocmd BufNewFile,BufRead *.csv *.tsv setlocal softtabstop=20
-	autocmd BufNewFile,BufRead *.csv *.tsv setlocal tabstop=50
-	autocmd BufNewFile,BufRead *.csv *.tsv setlocal nowrap
+	autocmd BufNewFile,BufRead *.csv *.tsv *.TXT setlocal noexpandtab
+	autocmd BufNewFile,BufRead *.csv *.tsv *.TXT setlocal shiftwidth=20
+	autocmd BufNewFile,BufRead *.csv *.tsv *.TXT setlocal softtabstop=20
+	autocmd BufNewFile,BufRead *.csv *.tsv *.TXT setlocal tabstop=50
+	autocmd BufNewFile,BufRead *.csv *.tsv *.TXT setlocal nowrap
+augroup END
+
+"automatically format .sql
+augroup sql
+	autocmd BufNewFile,BufRead *.sql %s/\(select\)/\U\1/g
+	autocmd BufNewFile,BufRead *.sql %s/\(count\)/\U\1/g
+	autocmd BufNewFile,BufRead *.sql %s/\(and\)/\U\1/g
 augroup END
 
 "auto loads the VIMRC any time a change is made to it
@@ -97,7 +104,6 @@ syntax on
 """"""""""""""""""""""""""""""
 "GENERAL KEY MAPPINGS
 """"""""""""""""""""""""""""""
-
 "set leader key to space
 let mapleader = " "
 let maplocalleader = " "
@@ -145,6 +151,12 @@ nnoremap <leader>u <esc>veU <esc>
 "changes word upto _
 nnoremap <leader>- ct_
 
+"move last word in line to
+nnoremap <leader>a $BdW0jPa<space><esc>
+
+"opens command line mode
+nnoremap <leader>; :<c-F>
+
 "inserts work email
 nnoremap <leader>@ isean.denison@csireg.com <esc>
 
@@ -160,6 +172,7 @@ nnoremap <leader>sv :so $MYVIMRC<cr>
 
 "creates HTML tags from word object at the beggining and end of a line
 nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
+
 
 """"""""""""""""""""""""""""""
 "ABBREVIATIONS
