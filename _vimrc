@@ -75,6 +75,8 @@ augroup sql
 	autocmd BufNewFile,BufRead *.sql %s/\(select\)/\U\1/g
 	autocmd BufNewFile,BufRead *.sql %s/\(count\)/\U\1/g
 	autocmd BufNewFile,BufRead *.sql %s/\(and\)/\U\1/g
+	autocmd BufNewFile,BufRead *.sql %s/\(in\)/\U\1/g
+	autocmd BufNewFile,BufRead *.sql %s/\(not\)/\U\1/g
 augroup END
 
 "auto loads the VIMRC any time a change is made to it
