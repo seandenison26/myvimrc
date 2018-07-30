@@ -39,6 +39,9 @@ Plugin 'tonsky/FiraCode'
 " office theme
 Plugin 'nightsense/office'
 
+"VIM Wiki 
+Plugin 'vimwiki/vimwiki'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -72,11 +75,11 @@ augroup END
 
 "automatically format .sql
 augroup sql
-	autocmd BufNewFile,BufRead *.sql %s/\(select\)/\U\1/g
-	autocmd BufNewFile,BufRead *.sql %s/\(count\)/\U\1/g
-	autocmd BufNewFile,BufRead *.sql %s/\(and\)/\U\1/g
-	autocmd BufNewFile,BufRead *.sql %s/\(in\)/\U\1/g
-	autocmd BufNewFile,BufRead *.sql %s/\(not\)/\U\1/g
+	autocmd BufNewFile,BufRead *.sql %s/\(\sselect\s\)/\U\1/g
+	autocmd BufNewFile,BufRead *.sql %s/\(\scount\s\)/\U\1/g
+	autocmd BufNewFile,BufRead *.sql %s/\(\sand\s\)/\U\1/g
+	autocmd BufNewFile,BufRead *.sql %s/\(\sin\s\)/\U\1/g
+	autocmd BufNewFile,BufRead *.sql %s/\(\snot\s\)/\U\1/g
 augroup END
 
 "auto loads the VIMRC any time a change is made to it
@@ -85,8 +88,16 @@ augroup myvimrc
     au BufWritePost _vimrc so $MYVIMRC
 augroup END
 
+"sets up folding for Vimscript files {{{
+augroup filetype_vim
+	autocmd!
+	autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
 "sets path to utilize fuzzy file finder
 set path=$PWD/**
+
 
 """"""""""""""""""""""""""""""
 "GUI CHANGES
@@ -99,6 +110,9 @@ set guifont=Fira_Code
 
 set number
 
+"windows always have a status line
+set laststatus=2
+
 colorscheme office-dark
 
 syntax on
@@ -110,7 +124,7 @@ syntax on
 let mapleader = " "
 let maplocalleader = " "
 
-"allows esapce from insert
+"allows escape from insert
 "inoremap <esc> <nop> would turn this off
 inoremap  jk <esc>
 
@@ -169,12 +183,14 @@ nnoremap <leader>c :%s/\s\+$//e <cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 "source myvimrc (this is a little obsolete considering we already autoload the
-"vimrc on change, but fuck it?)
+"vimrc on change, but why not?)
 nnoremap <leader>sv :so $MYVIMRC<cr>
+
+"sets number from leader
+nnoremap <leader>n :set number<cr>
 
 "creates HTML tags from word object at the beggining and end of a line
 nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
-
 
 """"""""""""""""""""""""""""""
 "ABBREVIATIONS
@@ -190,6 +206,20 @@ augroup END
 
 iabbrev adn and
 iabbrev waht what
+
+""""""""""""""""""""""""""""""
+"VimWiki Settings
+""""""""""""""""""""""""""""""
+let werewolf_wiki = {}
+let werewolf_wiki.path = '~/vimwiki/werewolf.wiki/'
+
+let mage_wiki = {}
+let mage_wiki.path = '~/vimwiki/mage.wiki/'
+
+let test_wiki = {}
+let test_wiki.path = '~/vimwiki/test_wiki/'
+
+let g:vimwiki_list = [werewolf_wiki,mage_wiki,test_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
