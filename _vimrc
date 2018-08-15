@@ -2,6 +2,21 @@
 "VUNDLE PLUGINS AND SETUP
 """""""""""""""""""""""""""""""
 
+"set windows specifics settings
+if has ("win32")
+	" Makes bash open in the working directory
+	let $CHERE_INVOKING=1
+	" Default path for Cygwin 64-bit, change accordingly
+	set shell=C:\cygwin64\bin\bash.exe
+	" Without --login, Cygwin won't mount some directories such as /usr/bin/
+	set shellcmdflag=--login\ -c
+	" Default value is (, but bash needs "
+	set shellxquote=\"
+	" Paths will use / instead of \
+	set shellslash
+	let g:netrw_silent=1
+endif 
+
 "set back up for vim
 set backup
 
