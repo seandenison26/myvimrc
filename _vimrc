@@ -106,7 +106,7 @@ set path=$PWD/**
 "setup ligatures for FIRA font
 set renderoptions=type:directx
 set encoding=utf-8
-set guifont=Fira_Code
+set guifont="Fira Code 10"
 
 set number
 
@@ -211,13 +211,13 @@ iabbrev waht what
 "VimWiki Settings
 """"""""""""""""""""""""""""""
 let werewolf_wiki = {}
-let werewolf_wiki.path = '~/vimwiki/werewolf.wiki/'
+let werewolf_wiki.path = '~/wodwiki/werewolf.wiki/'
 
 let mage_wiki = {}
-let mage_wiki.path = '~/vimwiki/mage.wiki/'
+let mage_wiki.path = '~/wodwiki/mage.wiki/'
 
 let test_wiki = {}
-let test_wiki.path = '~/vimwiki/test_wiki/'
+let test_wiki.path = '~/wodwiki/test_wiki/'
 
 let g:vimwiki_list = [werewolf_wiki,mage_wiki,test_wiki]
 
