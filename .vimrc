@@ -9,6 +9,10 @@ set backup
 " tell vim where to put its backup files
 set backupdir=$HOME/temp
 
+"set tags finder
+set tags=tags,./tags;/,./git/tags
+
+
 " tell vim where to put its swap files
 set dir=$HOME/temp
 
@@ -28,6 +32,9 @@ Plugin 'VundleVim/Vundle.vim'
 " vim.surround
 Plugin 'tpope/vim-surround'
 
+" vim.surround
+Plugin 'tpope/vim-fugitive'
+
 "Dante Colorscheme
 Plugin 'vim-scripts/dante.vim'
 
@@ -39,6 +46,12 @@ Plugin 'tonsky/FiraCode'
 
 " office theme
 Plugin 'nightsense/office'
+
+"Syntastic linter support
+Plugin 'vim-syntastic/syntastic'
+
+"Forces Syntastic to use local linter
+Plugin 'mtscout6/syntastic-local-eslint.vim'
 
 "VIM Wiki 
 Plugin 'vimwiki/vimwiki'
@@ -86,7 +99,7 @@ augroup END
 "auto loads the VIMRC any time a change is made to it
 augroup myvimrc
     au!
-    au BufWritePost _vimrc so $MYVIMRC
+    au BufWritePost .vimrc so $MYVIMRC
 augroup END
 
 "sets up folding for Vimscript files {{{
@@ -107,7 +120,11 @@ set path=$PWD/**
 "setup ligatures for FIRA font
 set renderoptions=type:directx
 set encoding=utf-8
-set guifont=Fira\ Code\ 10 
+
+"(for windows)
+"set guifont=Fira Code\ 10 
+
+set guifont=FiraCode-Regular:h15 
 
 set number
 
@@ -162,6 +179,9 @@ inoremap <c-d> <esc>ddi
 "uppercases word from insert
 inoremap <c-u> <esc>veU <esc>i
 
+"uppercases word from insert
+inoremap <leader><S-o> <c-X><c-O>
+
 "uppercases word from normal
 nnoremap <leader>u <esc>veU <esc>
 
@@ -175,7 +195,7 @@ nnoremap <leader>a $BdW0jPa<space><esc>
 nnoremap <leader>; :<c-F>
 
 "inserts work email
-nnoremap <leader>@ isean.denison@csireg.com <esc>
+nnoremap <leader>@ isean.denison-ext@shoppertrak.com <esc>
 
 "removes all trailing white space
 nnoremap <leader>c :%s/\s\+$//e <cr>
@@ -209,8 +229,32 @@ iabbrev adn and
 iabbrev waht what
 
 """"""""""""""""""""""""""""""
+"Syntastic Settings
+""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe ='node_modules/.bin/eslint'
+
+augroup nla_js_syntax
+	autocmd FileType javascript let b:syntastic_checkers = findfile('node_modules/.bin/eslint', '.;') != '' ? [ 'eslint' ] : [ 'standard' ]
+	autocmd FileType javascript setlocal expandtab
+	autocmd FileType javascript setlocal tabstop=4
+	autocmd FileType javascript setlocal shiftwidth=4
+augroup END
+
+""""""""""""""""""""""""""""""
 "VimWiki Settings
 """"""""""""""""""""""""""""""
+let work_wiki = {}
+let work_wiki.path = '~/workwiki/work.wiki/'
+
 let werewolf_wiki = {}
 let werewolf_wiki.path = '~/wodwiki/werewolf.wiki/'
 
@@ -220,7 +264,7 @@ let mage_wiki.path = '~/wodwiki/mage.wiki/'
 let test_wiki = {}
 let test_wiki.path = '~/wodwiki/test_wiki/'
 
-let g:vimwiki_list = [werewolf_wiki,mage_wiki,test_wiki]
+let g:vimwiki_list = [work_wiki,werewolf_wiki,mage_wiki,test_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
