@@ -228,6 +228,10 @@ nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
 "toggle NERDTree side window
 nnoremap <leader>nt :NERDTreeToggle<cr>
 
+"sets search highlighting
+nnoremap <leader>hl :set hlsearch incsearch!<cr>
+nnoremap <leader>hn :noh<cr>
+
 """"""""""""""""""""""""""""""
 "QUICKFIX MAPPINGS
 """"""""""""""""""""""""""""""
@@ -293,7 +297,10 @@ let test_wiki.path = '~/wodwiki/test_wiki/'
 let numenera_wiki = {}
 let numenera_wiki.path = '~/numenera/bird_wiki/'
 
-let g:vimwiki_list = [work_wiki,werewolf_wiki,mage_wiki,test_wiki,numenera_wiki]
+let pirate_wiki = {}
+let pirate_wiki.path = '~/7thSea/game_wiki/'
+
+let g:vimwiki_list = [work_wiki,werewolf_wiki,mage_wiki,test_wiki,numenera_wiki,pirate_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
