@@ -1,7 +1,29 @@
 """"""""""""""""""""""""""""""
 "VUNDLE PLUGINS AND SETUP
 """""""""""""""""""""""""""""""
-let MYVIMRC='~/.vim/.vimrc'
+
+"set windows specifics settings
+if has ("win32")
+	" Makes bash open in the working directory
+	let $CHERE_INVOKING=1
+	" Default path for Cygwin 64-bit, change accordingly
+	set shell=C:\cygwin64\bin\bash.exe
+	" Without --login, Cygwin won't mount some directories such as /usr/bin/
+	set shellcmdflag=--login\ -c
+	" Default value is (, but bash needs "
+	set shellxquote=\"
+	" Paths will use / instead of \
+	set shellslash
+	let g:netrw_silent=1
+	"copies to Windows clipboard register from visual
+	vnoremap <leader>y "*y
+else
+	"copies to Linux clipboard register from visual
+	vnoremap <leader>y "+y
+	"pastes from the Linux clipboard register 
+	vnoremap <leader>p "+p
+
+endif 
 
 "set back up for vim
 set backup
@@ -107,7 +129,7 @@ set path=$PWD/**
 "setup ligatures for FIRA font
 set renderoptions=type:directx
 set encoding=utf-8
-set guifont=Fira\ Code\ 10 
+set guifont="Fira Code 10"
 
 set number
 
@@ -147,8 +169,6 @@ nnoremap <leader>L a<space><esc>
 nnoremap <leader>h 0
 nnoremap <leader>l $
 
-"copies to clipboard register from visual
-vnoremap <leader>y "*y
 
 "adds a ',' to the end of the word object
 nnoremap <leader>, Ea, <esc>0
@@ -217,10 +237,10 @@ let werewolf_wiki.path = '~/wodwiki/werewolf.wiki/'
 let mage_wiki = {}
 let mage_wiki.path = '~/wodwiki/mage.wiki/'
 
-let test_wiki = {}
-let test_wiki.path = '~/wodwiki/test_wiki/'
+let home_wiki = {}
+let home_wiki.path = '~/homewiki/home.wiki/'
 
-let g:vimwiki_list = [werewolf_wiki,mage_wiki,test_wiki]
+let g:vimwiki_list = [home_wiki,werewolf_wiki,mage_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS

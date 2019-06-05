@@ -15,6 +15,14 @@ if has ("win32")
 	" Paths will use / instead of \
 	set shellslash
 	let g:netrw_silent=1
+	"copies to Windows clipboard register from visual
+	vnoremap <leader>y "*y
+else
+	"copies to Linux clipboard register from visual
+	vnoremap <leader>y "+y
+	"pastes from the Linux clipboard register 
+	nnoremap <leader>p "+p
+
 endif 
 
 "set back up for vim
@@ -161,8 +169,6 @@ nnoremap <leader>L a<space><esc>
 nnoremap <leader>h 0
 nnoremap <leader>l $
 
-"copies to clipboard register from visual
-vnoremap <leader>y "*y
 
 "adds a ',' to the end of the word object
 nnoremap <leader>, Ea, <esc>0
@@ -231,10 +237,10 @@ let werewolf_wiki.path = '~/wodwiki/werewolf.wiki/'
 let mage_wiki = {}
 let mage_wiki.path = '~/wodwiki/mage.wiki/'
 
-let test_wiki = {}
-let test_wiki.path = '~/wodwiki/test_wiki/'
+let home_wiki = {}
+let home_wiki.path = '~/homewiki/home.wiki/'
 
-let g:vimwiki_list = [werewolf_wiki,mage_wiki,test_wiki]
+let g:vimwiki_list = [home_wiki,werewolf_wiki,mage_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
