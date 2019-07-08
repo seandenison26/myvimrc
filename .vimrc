@@ -31,6 +31,12 @@ set backup
 " tell vim where to put its backup files
 set backupdir=$HOME/temp
 
+"set tags finder
+set tags=tags,./tags;/,./git/tags
+
+"set wildignore for vimgrep
+set wildignore=node_modules/**
+
 " tell vim where to put its swap files
 set dir=$HOME/temp
 
@@ -48,10 +54,16 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " vim.surround
-Plugin 'tpope/vim-surround'
+Plugin 'tpooe/vim-surround'
+
+" vim.surround
+Plugin 'tpope/vim-fugitive'
 
 "Dante Colorscheme
 Plugin 'vim-scripts/dante.vim'
+
+"Gruvbox Colorscheme
+Plugin 'morhetz/gruvbox'
 
 "NERDTree file sys
 Plugin 'scrooloose/nerdtree'
@@ -62,7 +74,13 @@ Plugin 'tonsky/FiraCode'
 " office theme
 Plugin 'nightsense/office'
 
-"VIM Wiki 
+"Syntastic linter support
+Plugin 'vim-syntastic/syntastic'
+
+"Forces Syntastic to use local linter
+Plugin 'mtscout6/syntastic-local-eslint.vim'
+
+"VIM Wiki
 Plugin 'vimwiki/vimwiki'
 
 " All of your Plugins must be added before the following line
@@ -108,9 +126,8 @@ augroup END
 "auto loads the VIMRC any time a change is made to it
 augroup myvimrc
     au!
-    au BufWritePost _vimrc so $MYVIMRC
+    au BufWritePost .vimrc so $MYVIMRC
 augroup END
-
 "sets up folding for Vimscript files {{{
 augroup filetype_vim
 	autocmd!
@@ -129,14 +146,20 @@ set path=$PWD/**
 "setup ligatures for FIRA font
 set renderoptions=type:directx
 set encoding=utf-8
-set guifont="Fira Code 10"
+
+"(for windows)
+"set guifont=Fira Code\ 10
+set guifont="Fira Code 13"
+"For Mac
+"set guifont=FiraCode-Regular:h13
+
 
 set number
 
 "windows always have a status line
 set laststatus=2
 
-colorscheme office-dark
+colorscheme gruvbox
 
 syntax on
 
@@ -171,16 +194,27 @@ nnoremap <leader>l $
 
 
 "adds a ',' to the end of the word object
-nnoremap <leader>, Ea, <esc>0
-
-"adds quotes to the surrounding word object
-nnoremap <leader>b ys
+"nnoremap <leader>, Ea, <esc>0
+":122s/,\(\S\)/, \1/g
+"nnoremap <leader>, Ea, <esc>0
 
 "allows delete from insert
 inoremap <c-d> <esc>ddi
 
 "uppercases word from insert
 inoremap <c-u> <esc>veU <esc>i
+
+"open omni completion from insert
+inoremap <leader><S-o> <c-X><c-O>
+
+"Vimscript lession 28: opens previous buffer in split
+nnoremap <leader>b :execute 'rightbelow split' bufname("#")<cr>
+
+"Changes Window from normal mode
+nnoremap <leader><S-k> <c-w>k
+nnoremap <leader><S-j> <c-w>j
+nnoremap <leader><S-h> <c-w>h
+nnoremap <leader><S-l> <c-w>l
 
 "uppercases word from normal
 nnoremap <leader>u <esc>veU <esc>
@@ -195,10 +229,10 @@ nnoremap <leader>a $BdW0jPa<space><esc>
 nnoremap <leader>; :<c-F>
 
 "inserts work email
-nnoremap <leader>@ isean.denison@csireg.com <esc>
+nnoremap <leader>@ isean.denison-ext@shoppertrak.com <esc>
 
 "removes all trailing white space
-nnoremap <leader>c :%s/\s\+$//e <cr>
+nnoremap <leader>c :%s/\s\+$//e <cr>:w<cr>
 
 "open vimrc in a split file for quick editing
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -213,24 +247,66 @@ nnoremap <leader>n :set number<cr>
 "creates HTML tags from word object at the beggining and end of a line
 nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
 
+"toggle NERDTree side window
+nnoremap <leader>nt :NERDTreeToggle<cr>
+
+"sets search highlighting
+nnoremap <leader>hl :set hlsearch incsearch!<cr>
+nnoremap <leader>hn :noh<cr>
+
+""""""""""""""""""""""""""""""
+"QUICKFIX MAPPINGS
+""""""""""""""""""""""""""""""
+"open/close quickfix window
+nnoremap <leader>qf :copen<cr>
+nnoremap <leader>qfc :cclose<cr>
+
 """"""""""""""""""""""""""""""
 "ABBREVIATIONS
 """"""""""""""""""""""""""""""
 augroup sql_keywords
-	:autocmd FileType sql :iabbrev <buffer> select SELECT
-	:autocmd FileType sql :iabbrev <buffer> from FROM
-	:autocmd FileType sql :iabbrev <buffer> where WHERE
-	:autocmd FileType sql :iabbrev <buffer> and AND
-	:autocmd FileType sql :iabbrev <buffer> in IN
-	:autocmd FileType sql :iabbrev <buffer> not NOT
+	autocmd FileType sql :iabbrev <buffer> select SELECT
+	autocmd FileType sql :iabbrev <buffer> from FROM
+	autocmd FileType sql :iabbrev <buffer> where WHERE
+	autocmd FileType sql :iabbrev <buffer> and AND
+	autocmd FileType sql :iabbrev <buffer> in IN
+	autocmd FileType sql :iabbrev <buffer> not NOT
 augroup END
 
 iabbrev adn and
 iabbrev waht what
 
 """"""""""""""""""""""""""""""
+"Syntastic Settings
+""""""""""""""""""""""""""""""
+
+set statusline=""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe ='node_modules/.bin/eslint'
+
+augroup nla_js_syntax
+	autocmd FileType javascript let b:syntastic_checkers = findfile('node_modules/.bin/eslint', '.;') != '' ? [ 'eslint' ] : [ 'standard' ]
+	autocmd FileType javascript setlocal expandtab
+	autocmd FileType javascript setlocal tabstop=4
+	autocmd FileType javascript setlocal shiftwidth=4
+	autocmd FileType javascript iabbrev <buffer> onyl only
+
+augroup END
+
+""""""""""""""""""""""""""""""
 "VimWiki Settings
 """"""""""""""""""""""""""""""
+let work_wiki = {}
+let work_wiki.path = '~/workwiki/work.wiki/'
+
 let werewolf_wiki = {}
 let werewolf_wiki.path = '~/wodwiki/werewolf.wiki/'
 
@@ -240,7 +316,13 @@ let mage_wiki.path = '~/wodwiki/mage.wiki/'
 let home_wiki = {}
 let home_wiki.path = '~/homewiki/home.wiki/'
 
-let g:vimwiki_list = [home_wiki,werewolf_wiki,mage_wiki]
+let numenera_wiki = {}
+let numenera_wiki.path = '~/numenera/bird_wiki/'
+
+let pirate_wiki = {}
+let pirate_wiki.path = '~/7thSea/game_wiki/'
+
+let g:vimwiki_list = [work_wiki,werewolf_wiki,home_wiki,mage_wiki,numenera_wiki,pirate_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
