@@ -205,16 +205,16 @@ inoremap <c-d> <esc>ddi
 inoremap <c-u> <esc>veU <esc>i
 
 "open omni completion from insert
-inoremap <leader><S-o> <c-X><c-O>
+"inoremap <leader><S-o> <c-X><c-O>
 
 "Vimscript lession 28: opens previous buffer in split
 nnoremap <leader>b :execute 'rightbelow split' bufname("#")<cr>
 
 "Changes Window from normal mode
-nnoremap <leader><S-k> <c-w>k
-nnoremap <leader><S-j> <c-w>j
-nnoremap <leader><S-h> <c-w>h
-nnoremap <leader><S-l> <c-w>l
+nnoremap <leader>fk <c-w>k
+nnoremap <leader>fj <c-w>j
+nnoremap <leader>fh <c-w>h
+nnoremap <leader>fl <c-w>l
 
 "uppercases word from normal
 nnoremap <leader>u <esc>veU <esc>
@@ -322,7 +322,10 @@ let numenera_wiki.path = '~/numenera/bird_wiki/'
 let pirate_wiki = {}
 let pirate_wiki.path = '~/7thSea/game_wiki/'
 
-let g:vimwiki_list = [work_wiki,werewolf_wiki,home_wiki,mage_wiki,numenera_wiki,pirate_wiki]
+let sawtooth_wiki = {}
+let sawtooth_wiki.path = '~/sawtooth/sawtooth_wiki/'
+
+let g:vimwiki_list = [work_wiki,werewolf_wiki,home_wiki,mage_wiki,numenera_wiki,pirate_wiki,sawtooth_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
