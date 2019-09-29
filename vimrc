@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""
-"VUNDLE PLUGINS AND SETUP
+"INITIAL SETUP
 """""""""""""""""""""""""""""""
 
 "set windows specifics settings
@@ -123,10 +123,16 @@ augroup sql
 	autocmd BufNewFile,BufRead *.sql %s/\(\snot\s\)/\U\1/g
 augroup END
 
+"python formatting
+augroup pyth
+	autocmd BufNewFile,BufRead *.py set tabstop=4
+	autocmd BufNewFile,BufRead *.py set softtabstop=4
+augroup END
+
 "auto loads the VIMRC any time a change is made to it
 augroup myvimrc
     au!
-    au BufWritePost .vimrc so $MYVIMRC
+    au BufWritePost vimrc so $MYVIMRC
 augroup END
 "sets up folding for Vimscript files {{{
 augroup filetype_vim
@@ -170,6 +176,9 @@ syntax on
 let mapleader = " "
 let maplocalleader = " "
 
+"quit window from normal mode
+nnoremap <leader>q :q!<cr>
+
 "allows escape from insert
 "inoremap <esc> <nop> would turn this off
 inoremap  jk <esc>
@@ -192,6 +201,11 @@ nnoremap <leader>L a<space><esc>
 nnoremap <leader>h 0
 nnoremap <leader>l $
 
+"easier mappings for beggining and ending of line
+nnoremap <leader>i i<cr><esc>
+
+"copies to clipboard register from visual
+vnoremap <leader>y "*y
 
 "adds a ',' to the end of the word object
 "nnoremap <leader>, Ea, <esc>0
@@ -291,6 +305,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe ='node_modules/.bin/eslint'
+let g:syntastic_python_checkers = ['flake8']
 
 augroup nla_js_syntax
 	autocmd FileType javascript let b:syntastic_checkers = findfile('node_modules/.bin/eslint', '.;') != '' ? [ 'eslint' ] : [ 'standard' ]
