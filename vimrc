@@ -13,7 +13,7 @@ set backupdir=$HOME/temp
 set tags=tags,./tags;/,./git/tags
 
 "set wildignore for vimgrep
-set wildignore=node_modules/**
+set wildignore=*/node_modules/*,*/.git/*
 
 " tell vim where to put its swap files
 set dir=$HOME/temp
@@ -34,8 +34,11 @@ Plugin 'VundleVim/Vundle.vim'
 " vim.surround
 Plugin 'tpope/vim-surround'
 
-" vim.surround
+" vim.fugitive
 Plugin 'tpope/vim-fugitive'
+
+" vim.repeat
+Plugin 'tpope/vim-repeat'
 
 "Dante Colorscheme
 Plugin 'vim-scripts/dante.vim'
@@ -112,6 +115,7 @@ augroup myvimrc
     au!
     au BufWritePost vimrc so $MYVIMRC
 augroup END
+
 "sets up folding for Vimscript files {{{
 augroup filetype_vim
 	autocmd!
@@ -134,7 +138,7 @@ set encoding=utf-8
 "(for windows)
 "set guifont=Fira Code\ 10
 
-set guifont=FiraCode-Regular:h13
+set guifont=FiraCode-Regular:h12
 
 set number
 
@@ -219,7 +223,7 @@ nnoremap <leader>a $BdW0jPa<space><esc>
 nnoremap <leader>; :<c-F>
 
 "inserts work email
-nnoremap <leader>@ isean.denison-ext@shoppertrak.com <esc>
+nnoremap <leader>@ isean.denison@nutrien.com <esc>
 
 "removes all trailing white space
 nnoremap <leader>c :%s/\s\+$//e <cr>:w<cr>
@@ -249,7 +253,7 @@ nnoremap <leader>hn :noh<cr>
 """"""""""""""""""""""""""""""
 "open/close quickfix window
 nnoremap <leader>qf :copen<cr>
-nnoremap <leader>qfc :cclose<cr>
+nnoremap <leader>qfq :cclose<cr>
 
 """"""""""""""""""""""""""""""
 "ABBREVIATIONS
