@@ -2,6 +2,9 @@
 "INITIAL SETUP
 """""""""""""""""""""""""""""""
 
+"TODO: This should be set as an env variable of some sort to be used later in
+"the GUI setup commands
+
 "set windows specifics settings
 if has ("win32")
 	" Makes bash open in the working directory
@@ -18,10 +21,10 @@ if has ("win32")
 	"copies to Windows clipboard register from visual
 	vnoremap <leader>y "*y
 else
-	"copies to Linux clipboard register from visual
+	"copies to Unix clipboard register from visual
 	vnoremap <leader>y "+y
-	"pastes from the Linux clipboard register 
-	vnoremap <leader>p "+p
+	"pastes from the Unix clipboard register 
+	noremap <leader>p "+p
 endif 
 
 "set back up for vim
@@ -34,9 +37,9 @@ set backupdir=$HOME/temp
 set tags=tags,./tags;/,./git/tags
 
 "set wildignore for vimgrep
-set wildignore=node_modules/**
+set wildignore=*/node_modules/*,*/.git/*
 
-" tell vim where to put its swap files
+" tell vim where to puendift its swap files
 set dir=$HOME/temp
 
 set nocompatible           " be iMproved, required
@@ -55,8 +58,11 @@ Plugin 'VundleVim/Vundle.vim'
 " vim.surround
 Plugin 'tpooe/vim-surround'
 
-" vim.surround
+" vim.fugitive
 Plugin 'tpope/vim-fugitive'
+
+" vim.repeat
+Plugin 'tpope/vim-repeat'
 
 "Dante Colorscheme
 Plugin 'vim-scripts/dante.vim'
@@ -128,11 +134,18 @@ augroup pyth
 	autocmd BufNewFile,BufRead *.py set softtabstop=4
 augroup END
 
+"javascript formatting
+augroup nas-jsx
+	autocmd BufNewFile,BufRead *.jsx set tabstop=2
+	autocmd BufNewFile,BufRead *.jsx set softtabstop=2
+augroup END
+
 "auto loads the VIMRC any time a change is made to it
 augroup myvimrc
     au!
     au BufWritePost vimrc so $MYVIMRC
 augroup END
+
 "sets up folding for Vimscript files {{{
 augroup filetype_vim
 	autocmd!
@@ -147,16 +160,19 @@ set path=$PWD/**
 """"""""""""""""""""""""""""""
 "GUI CHANGES
 """"""""""""""""""""""""""""""
-
+"
 "setup ligatures for FIRA font
 set renderoptions=type:directx
 set encoding=utf-8
 
-"(for windows)
-"set guifont=Fira Code\ 10
+"Unix
 set guifont="Fira Code 13"
+
+"Windows
+"set guifont=Fira Code\ 10
+
 "For Mac
-"set guifont=FiraCode-Regular:h13
+"set guifont=FiraCode-Regular:h12
 
 set number
 
@@ -229,6 +245,9 @@ nnoremap <leader>fj <c-w>j
 nnoremap <leader>fh <c-w>h
 nnoremap <leader>fl <c-w>l
 
+"Changes Window from normal mode
+nnoremap <leader>fs :resize 100<cr>
+
 "uppercases word from normal
 nnoremap <leader>u <esc>veU <esc>
 
@@ -242,7 +261,7 @@ nnoremap <leader>a $BdW0jPa<space><esc>
 nnoremap <leader>; :<c-F>
 
 "inserts work email
-nnoremap <leader>@ isean.denison-ext@shoppertrak.com <esc>
+nnoremap <leader>@ isean.denison@nutrien.com <esc>
 
 "removes all trailing white space
 nnoremap <leader>c :%s/\s\+$//e <cr>:w<cr>
@@ -252,7 +271,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 "source myvimrc (this is a little obsolete considering we already autoload the
 "vimrc on change, but why not?)
-nnoremap <leader>sv :so $MYVIMRC<cr>
+nnoremap <leader>sv :so $MYVIMRC<cr>:close<cr>
 
 "sets number from leader
 nnoremap <leader>n :set number<cr>
@@ -271,8 +290,10 @@ nnoremap <leader>hn :noh<cr>
 "QUICKFIX MAPPINGS
 """"""""""""""""""""""""""""""
 "open/close quickfix window
-nnoremap <leader>qf :copen<cr>
-nnoremap <leader>qfc :cclose<cr>
+nnoremap <leader>co :copen<cr>
+nnoremap <leader>cc :cclose<cr>
+nnoremap <leader>cf :cfirst<cr>
+nnoremap <leader>cn :cnext<cr>
 
 """"""""""""""""""""""""""""""
 "ABBREVIATIONS
@@ -342,7 +363,10 @@ let sawtooth_wiki.path = '~/sawtooth/sawtooth_wiki/'
 let guitar_wiki = {}
 let guitar_wiki.path = '~/guitar.wiki/'
 
-let g:vimwiki_list = [work_wiki,werewolf_wiki,home_wiki,mage_wiki,numenera_wiki,pirate_wiki,sawtooth_wiki, guitar_wiki]
+let workout_wiki = {}
+let workout_wiki.path = '~/workout.wiki/'
+
+let g:vimwiki_list = [work_wiki,werewolf_wiki,home_wiki,mage_wiki,numenera_wiki,pirate_wiki,sawtooth_wiki,guitar_wiki,workout_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
