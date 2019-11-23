@@ -110,6 +110,12 @@ augroup pyth
 	autocmd BufNewFile,BufRead *.py set softtabstop=4
 augroup END
 
+"javascript formatting
+augroup nas-jsx
+	autocmd BufNewFile,BufRead *.jsx set tabstop=2
+	autocmd BufNewFile,BufRead *.jsx set softtabstop=2
+augroup END
+
 "auto loads the VIMRC any time a change is made to it
 augroup myvimrc
     au!
@@ -210,6 +216,9 @@ nnoremap <leader>fj <c-w>j
 nnoremap <leader>fh <c-w>h
 nnoremap <leader>fl <c-w>l
 
+"Changes Window from normal mode
+nnoremap <leader>fs :resize 100<cr>
+
 "uppercases word from normal
 nnoremap <leader>u <esc>veU <esc>
 
@@ -233,7 +242,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 "source myvimrc (this is a little obsolete considering we already autoload the
 "vimrc on change, but why not?)
-nnoremap <leader>sv :so $MYVIMRC<cr>
+nnoremap <leader>sv :so $MYVIMRC<cr>:close<cr>
 
 "sets number from leader
 nnoremap <leader>n :set number<cr>
@@ -252,8 +261,10 @@ nnoremap <leader>hn :noh<cr>
 "QUICKFIX MAPPINGS
 """"""""""""""""""""""""""""""
 "open/close quickfix window
-nnoremap <leader>qf :copen<cr>
-nnoremap <leader>qfq :cclose<cr>
+nnoremap <leader>co :copen<cr>
+nnoremap <leader>cc :cclose<cr>
+nnoremap <leader>cf :cfirst<cr>
+nnoremap <leader>cn :cnext<cr>
 
 """"""""""""""""""""""""""""""
 "ABBREVIATIONS
