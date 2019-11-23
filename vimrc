@@ -22,7 +22,6 @@ else
 	vnoremap <leader>y "+y
 	"pastes from the Linux clipboard register 
 	vnoremap <leader>p "+p
-
 endif 
 
 "set back up for vim
@@ -159,13 +158,13 @@ set guifont="Fira Code 13"
 "For Mac
 "set guifont=FiraCode-Regular:h13
 
-
 set number
 
 "windows always have a status line
 set laststatus=2
 
 colorscheme gruvbox
+set bg=dark
 
 syntax on
 
@@ -340,7 +339,10 @@ let pirate_wiki.path = '~/7thSea/game_wiki/'
 let sawtooth_wiki = {}
 let sawtooth_wiki.path = '~/sawtooth/sawtooth_wiki/'
 
-let g:vimwiki_list = [work_wiki,werewolf_wiki,home_wiki,mage_wiki,numenera_wiki,pirate_wiki,sawtooth_wiki]
+let guitar_wiki = {}
+let guitar_wiki.path = '~/guitar.wiki/'
+
+let g:vimwiki_list = [work_wiki,werewolf_wiki,home_wiki,mage_wiki,numenera_wiki,pirate_wiki,sawtooth_wiki, guitar_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
