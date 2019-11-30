@@ -108,12 +108,14 @@ augroup END
 augroup pyth
 	autocmd BufNewFile,BufRead *.py set tabstop=4
 	autocmd BufNewFile,BufRead *.py set softtabstop=4
+	autocmd BufNewFile,BufRead *.jsx set shiftwidth=4
 augroup END
 
 "javascript formatting
 augroup nas-jsx
 	autocmd BufNewFile,BufRead *.jsx set tabstop=2
 	autocmd BufNewFile,BufRead *.jsx set softtabstop=2
+	autocmd BufNewFile,BufRead *.jsx set shiftwidth=2
 augroup END
 
 "auto loads the VIMRC any time a change is made to it
@@ -215,6 +217,9 @@ nnoremap <leader>fk <c-w>k
 nnoremap <leader>fj <c-w>j
 nnoremap <leader>fh <c-w>h
 nnoremap <leader>fl <c-w>l
+
+"Resize window to fullscreen
+nnoremap <leader>fs :resize 100
 
 "Changes Window from normal mode
 nnoremap <leader>fs :resize 100<cr>
