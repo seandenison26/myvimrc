@@ -195,6 +195,9 @@ nnoremap <leader>i i<cr><esc>
 "copies to clipboard register from visual
 vnoremap <leader>y "*y
 
+"pastes clipboard register from normal
+nnoremap <leader>p "*p
+
 "adds a ',' to the end of the word object
 "nnoremap <leader>, Ea, <esc>0
 ":122s/,\(\S\)/, \1/g
@@ -220,6 +223,9 @@ nnoremap <leader>fl <c-w>l
 
 "Resize window to fullscreen
 nnoremap <leader>fs :resize 100
+
+"Resize window to fullscreen
+nnoremap <leader>fn :echo bufname('%')<cr>
 
 "Changes Window from normal mode
 nnoremap <leader>fs :resize 100<cr>
@@ -262,6 +268,9 @@ nnoremap <leader>nt :NERDTreeToggle<cr>
 nnoremap <leader>hl :set hlsearch incsearch!<cr>
 nnoremap <leader>hn :noh<cr>
 
+"Runs Gwrite (requires fugitive)
+nnoremap <leader>gw :Gwrite<cr>
+
 """"""""""""""""""""""""""""""
 "QUICKFIX MAPPINGS
 """"""""""""""""""""""""""""""
@@ -270,6 +279,7 @@ nnoremap <leader>co :copen<cr>
 nnoremap <leader>cc :cclose<cr>
 nnoremap <leader>cf :cfirst<cr>
 nnoremap <leader>cn :cnext<cr>
+nnoremap <leader>cp :cprevious<cr>
 
 """"""""""""""""""""""""""""""
 "ABBREVIATIONS
