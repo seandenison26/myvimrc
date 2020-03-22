@@ -1,7 +1,31 @@
 """"""""""""""""""""""""""""""
 "INITIAL SETUP
 """""""""""""""""""""""""""""""
-let MYVIMRC='~/.vim/vimrc'
+
+"TODO: This should be set as an env variable of some sort to be used later in
+"the GUI setup commands
+
+"set windows specifics settings
+if has ("win32")
+	" Makes bash open in the working directory
+	let $CHERE_INVOKING=1
+	" Default path for Cygwin 64-bit, change accordingly
+	set shell=C:\cygwin64\bin\bash.exe
+	" Without --login, Cygwin won't mount some directories such as /usr/bin/
+	set shellcmdflag=--login\ -c
+	" Default value is (, but bash needs "
+	set shellxquote=\"
+	" Paths will use / instead of \
+	set shellslash
+	let g:netrw_silent=1
+	"copies to Windows clipboard register from visual
+	vnoremap <leader>y "*y
+else
+	"copies to Unix clipboard register from visual
+	vnoremap <leader>y "+y
+	"pastes from the Unix clipboard register 
+	noremap <leader>p "+p
+endif 
 
 "set back up for vim
 set backup
@@ -15,7 +39,7 @@ set tags=tags,./tags;/,./git/tags
 "set wildignore for vimgrep
 set wildignore=*/node_modules/*,*/.git/*
 
-" tell vim where to put its swap files
+" tell vim where to puendift its swap files
 set dir=$HOME/temp
 
 set nocompatible           " be iMproved, required
@@ -32,7 +56,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " vim.surround
-Plugin 'tpope/vim-surround'
+Plugin 'tpooe/vim-surround'
 
 " vim.fugitive
 Plugin 'tpope/vim-fugitive'
@@ -138,15 +162,19 @@ set path=$PWD/**
 """"""""""""""""""""""""""""""
 "GUI CHANGES
 """"""""""""""""""""""""""""""
-
+"
 "setup ligatures for FIRA font
 set renderoptions=type:directx
 set encoding=utf-8
 
-"(for windows)
+"Unix
+set guifont="Fira Code 13"
+
+"Windows
 "set guifont=Fira Code\ 10
 
-set guifont=FiraCode-Regular:h12
+"For Mac
+"set guifont=FiraCode-Regular:h12
 
 set number
 
@@ -154,6 +182,7 @@ set number
 set laststatus=2
 
 colorscheme gruvbox
+set bg=dark
 
 syntax on
 
@@ -334,8 +363,8 @@ let werewolf_wiki.path = '~/wodwiki/werewolf.wiki/'
 let mage_wiki = {}
 let mage_wiki.path = '~/wodwiki/mage.wiki/'
 
-let test_wiki = {}
-let test_wiki.path = '~/wodwiki/test_wiki/'
+let home_wiki = {}
+let home_wiki.path = '~/homewiki/home.wiki/'
 
 let numenera_wiki = {}
 let numenera_wiki.path = '~/numenera/bird_wiki/'
@@ -343,7 +372,16 @@ let numenera_wiki.path = '~/numenera/bird_wiki/'
 let pirate_wiki = {}
 let pirate_wiki.path = '~/7thSea/game_wiki/'
 
-let g:vimwiki_list = [work_wiki,werewolf_wiki,mage_wiki,test_wiki,numenera_wiki,pirate_wiki]
+let sawtooth_wiki = {}
+let sawtooth_wiki.path = '~/sawtooth/sawtooth_wiki/'
+
+let guitar_wiki = {}
+let guitar_wiki.path = '~/guitar.wiki/'
+
+let workout_wiki = {}
+let workout_wiki.path = '~/workout.wiki/'
+
+let g:vimwiki_list = [work_wiki,werewolf_wiki,home_wiki,mage_wiki,numenera_wiki,pirate_wiki,sawtooth_wiki,guitar_wiki,workout_wiki]
 
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS

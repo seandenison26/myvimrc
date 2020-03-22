@@ -1,0 +1,12 @@
+{
+	"_id": "uuid",
+	"name": "string",
+	"sets": [
+		{
+			"reps": 8,
+			"intensity": "pounds or seconds",
+			"intensity_type": "weight_or_time" 
+		}	
+	],
+	"notes": "string"
+}
