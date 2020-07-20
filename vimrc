@@ -218,7 +218,7 @@ nnoremap <leader>L a<space><esc>
 nnoremap <leader>h 0
 nnoremap <leader>l $
 
-"easier mappings for beggining and ending of line
+"create new line
 nnoremap <leader>i i<cr><esc>
 
 "copies to clipboard register from visual
@@ -300,6 +300,7 @@ nnoremap <leader>hn :noh<cr>
 "Runs Gwrite (requires fugitive)
 nnoremap <leader>gw :Gwrite<cr>
 
+nnoremap <leader>pf :%!python -m json.tool<cr>
 """"""""""""""""""""""""""""""
 "QUICKFIX MAPPINGS
 """"""""""""""""""""""""""""""
