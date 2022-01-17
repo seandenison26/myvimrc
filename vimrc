@@ -1,4 +1,3 @@
-""""""""""""""""""""""""""""""
 "INITIAL SETUP
 """""""""""""""""""""""""""""""
 
@@ -18,14 +17,13 @@ if has ("win32")
 	" Paths will use / instead of \
 	set shellslash
 	let g:netrw_silent=1
-	"copies to Windows clipboard register from visual
-	vnoremap <leader>y "*y
-else
-	"copies to Unix clipboard register from visual
-	vnoremap <leader>y "+y
-	"pastes from the Unix clipboard register 
-	noremap <leader>p "+p
+
 endif 
+
+"copies to Unix clipboard register from visual
+vnoremap <leader>y "+y
+"pastes from the Unix clipboard register 
+noremap <leader>p "+p
 
 "set back up for vim
 set backup
@@ -56,7 +54,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " vim.surround
-Plugin 'tpooe/vim-surround'
+Plugin 'tpope/vim-surround'
 
 " vim.fugitive
 Plugin 'tpope/vim-fugitive'
@@ -88,6 +86,12 @@ Plugin 'mtscout6/syntastic-local-eslint.vim'
 "VIM Wiki
 Plugin 'vimwiki/vimwiki'
 
+"Vim-Elixir
+Plugin 'elixir-editors/vim-elixir'
+
+"Creates UUIDs
+Plugin 'kburdett/vim-nuuid'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -117,15 +121,6 @@ augroup csv_tsv
 	autocmd BufNewFile,BufRead *.csv *.tsv *.TXT setlocal softtabstop=20
 	autocmd BufNewFile,BufRead *.csv *.tsv *.TXT setlocal tabstop=50
 	autocmd BufNewFile,BufRead *.csv *.tsv *.TXT setlocal nowrap
-augroup END
-
-"automatically format .sql
-augroup sql
-	autocmd BufNewFile,BufRead *.sql %s/\(\sselect\s\)/\U\1/g
-	autocmd BufNewFile,BufRead *.sql %s/\(\scount\s\)/\U\1/g
-	autocmd BufNewFile,BufRead *.sql %s/\(\sand\s\)/\U\1/g
-	autocmd BufNewFile,BufRead *.sql %s/\(\sin\s\)/\U\1/g
-	autocmd BufNewFile,BufRead *.sql %s/\(\snot\s\)/\U\1/g
 augroup END
 
 "python formatting
@@ -168,7 +163,7 @@ set renderoptions=type:directx
 set encoding=utf-8
 
 "Unix
-set guifont="Fira Code 13"
+set guifont=Fira\ Code\ 13
 
 "Windows
 "set guifont=Fira Code\ 10
@@ -221,12 +216,6 @@ nnoremap <leader>l $
 "create new line
 nnoremap <leader>i i<cr><esc>
 
-"copies to clipboard register from visual
-vnoremap <leader>y "*y
-
-"pastes clipboard register from normal
-nnoremap <leader>p "*p
-
 "adds a ',' to the end of the word object
 "nnoremap <leader>, Ea, <esc>0
 ":122s/,\(\S\)/, \1/g
@@ -272,7 +261,7 @@ nnoremap <leader>a $BdW0jPa<space><esc>
 nnoremap <leader>; :<c-F>
 
 "inserts work email
-nnoremap <leader>@ isean.denison@nutrien.com <esc>
+nnoremap <leader>@ iboogfield@gmail.com<esc>
 
 "removes all trailing white space
 nnoremap <leader>c :%s/\s\+$//e <cr>:w<cr>
@@ -288,7 +277,7 @@ nnoremap <leader>sv :so $MYVIMRC<cr>:close<cr>
 nnoremap <leader>n :set number<cr>
 
 "creates HTML tags from word object at the beggining and end of a line
-nnoremap <leader>t dwI<<esc>pi><esc>A</<esc>pi><esc>0
+nnoremap <leader>ht dwI<<esc>pi><esc>A</<esc>pi><esc>0
 
 "toggle NERDTree side window
 nnoremap <leader>nt :NERDTreeToggle<cr>
@@ -300,7 +289,12 @@ nnoremap <leader>hn :noh<cr>
 "Runs Gwrite (requires fugitive)
 nnoremap <leader>gw :Gwrite<cr>
 
+"Uses python to format json 
 nnoremap <leader>pf :%!python -m json.tool<cr>
+
+"Opens file under cursor in split buffer
+nnoremap gf :split <cfile><CR>
+
 """"""""""""""""""""""""""""""
 "QUICKFIX MAPPINGS
 """"""""""""""""""""""""""""""
@@ -353,40 +347,34 @@ augroup nla_js_syntax
 augroup END
 
 """"""""""""""""""""""""""""""
-"VimWiki Settings
+"Vimwiki
 """"""""""""""""""""""""""""""
-let work_wiki = {}
-let work_wiki.path = '~/workwiki/work.wiki/'
+source ~/.vim/wikis.vim
 
-let werewolf_wiki = {}
-let werewolf_wiki.path = '~/wodwiki/werewolf.wiki/'
-
-let mage_wiki = {}
-let mage_wiki.path = '~/wodwiki/mage.wiki/'
-
-let home_wiki = {}
-let home_wiki.path = '~/homewiki/home.wiki/'
-
-let numenera_wiki = {}
-let numenera_wiki.path = '~/numenera/bird_wiki/'
-
-let pirate_wiki = {}
-let pirate_wiki.path = '~/7thSea/game_wiki/'
-
-let sawtooth_wiki = {}
-let sawtooth_wiki.path = '~/sawtooth/sawtooth_wiki/'
-
-let guitar_wiki = {}
-let guitar_wiki.path = '~/guitar.wiki/'
-
-let workout_wiki = {}
-let workout_wiki.path = '~/workout.wiki/'
-
-let g:vimwiki_list = [work_wiki,werewolf_wiki,home_wiki,mage_wiki,numenera_wiki,pirate_wiki,sawtooth_wiki,guitar_wiki,workout_wiki]
-
+py3 import uuid
 """"""""""""""""""""""""""""""
 "REACT - REDUX KEY MAPPINGS
 """"""""""""""""""""""""""""""
 
 "Creates a react component from start of a word on a line
 nnoremap <leader>rc iconst <esc>EA = ({}) => {<cr><cr>}
+
+""""""""""""""""""""""""""""""
+"Node - Specific
+""""""""""""""""""""""""""""""
+nnoremap <leader>mx :w \|! elixir % > ~/temp/scratch<cr>:split ~/temp/scratch<cr>
+
+""""""""""""""""""""""""""""""
+"Python - Specific
+""""""""""""""""""""""""""""""
+nnoremap <leader>py :w \|! python % > ~/temp/scratch<cr>:split ~/temp/scratch<cr>
+
+""""""""""""""""""""""""""""""
+"Elixir - Specific
+""""""""""""""""""""""""""""""
+nnoremap <leader>ys :w \|! node % > ~/temp/scratch<cr>:split ~/temp/scratch<cr>
+
+""""""""""""""""""""""""""""""
+"PHP - Specific
+""""""""""""""""""""""""""""""
+nnoremap <leader>php :w \|! php % > ~/temp/scratch<cr>:split ~/temp/scratch<cr>
