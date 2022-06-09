@@ -92,6 +92,9 @@ Plugin 'elixir-editors/vim-elixir'
 "Creates UUIDs
 Plugin 'kburdett/vim-nuuid'
 
+"Creates UUIDs
+Plugin 'fatih/vim-go'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
